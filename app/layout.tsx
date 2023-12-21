@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
 import Navbar from '@/components/shared/nav'
 import Footer from '@/components/shared/footer'
+import { NextAuthProvider } from '@/context/authContext'
+import getCurrentUser from './actions/getCurrentUser'
 import './globals.css'
 
 const roboto = Roboto({
@@ -14,17 +16,20 @@ export const metadata: Metadata = {
   description: 'Travel Blog',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const user = await getCurrentUser()
   return (
     <html lang="en">
       <body className={`${roboto.className} overflowx-hidden bg-light`}>
-        <Navbar />
-        {children}
-        <Footer />
+        <NextAuthProvider>
+          <Navbar user={user} />
+          {children}
+          <Footer />
+        </NextAuthProvider>
       </body>
     </html>
   )

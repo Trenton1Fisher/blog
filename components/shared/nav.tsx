@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Button from '../ui/button'
 import Route from '../ui/route'
@@ -8,9 +9,18 @@ import MobileMenue from './mobileMenu'
 import UseMenuActive from '@/hooks/useMenuActive'
 import { navLinks } from '@/contants'
 import clsx from 'clsx'
+import { User } from '@prisma/client'
+import Image from 'next/image'
+import { signOut } from 'next-auth/react'
 
-export default function Navbar() {
+interface NavProps {
+  user: User
+}
+
+export default function Navbar({ user }: NavProps) {
   const [isScrolling, setIsScrolling] = useState(false)
+  const [openUserMenu, setOpenUserMenu] = useState(false)
+  const router = useRouter()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,10 +71,41 @@ export default function Navbar() {
             )
           })}
         </ul>
-        <div className="flex gap-5 flex-1 justify-end max-md:hidden">
-          <Button text="Log In" onClick={() => null} aria="Log In Button" />
-          <Button text="Sign Up" onClick={() => null} aria="Sign Up Button" />
-        </div>
+        {!user && (
+          <div className="flex gap-5 flex-1 justify-end max-md:hidden">
+            <Button
+              text="Log In"
+              onClick={() => router.push('/api/auth/signin')}
+              aria="Log In Button"
+            />
+          </div>
+        )}
+        {user && (
+          <div className="flex relative gap-5 items-center flex-1 justify-end max-md:hidden">
+            <h1>{user.name}</h1>
+            <Image
+              src={user.image as string}
+              height={45}
+              width={45}
+              alt={`Account Image of ${user.name}`}
+              className="rounded-full border-4 border-primary cursor-pointer"
+              onClick={() => setOpenUserMenu(!openUserMenu)}
+            />
+            {openUserMenu && (
+              <ul className="z-10 absolute right-0 top-full mt-2 w-48 bg-white shadow-md rounded-md p-4">
+                <Link href={'/create'} onClick={() => setOpenUserMenu(false)}>
+                  <li>Create A Post</li>
+                </Link>
+                <Link href={'/user'} onClick={() => setOpenUserMenu(false)}>
+                  <li>My Posts</li>
+                </Link>
+                <li className="cursor-pointer" onClick={() => signOut()}>
+                  Sign Out
+                </li>
+              </ul>
+            )}
+          </div>
+        )}
         <div>
           <MobileMenue />
         </div>
