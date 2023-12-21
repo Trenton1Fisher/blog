@@ -14,7 +14,7 @@ import Image from 'next/image'
 import { signOut } from 'next-auth/react'
 
 interface NavProps {
-  user: User
+  user: User | null
 }
 
 export default function Navbar({ user }: NavProps) {
