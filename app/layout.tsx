@@ -1,4 +1,3 @@
-export const dynamic = 'force-dynamic'
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
 import Navbar from '@/components/shared/nav'

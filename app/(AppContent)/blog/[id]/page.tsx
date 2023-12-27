@@ -10,7 +10,6 @@ import { formDate } from '@/utils/formDate'
 import prisma from '@/lib/prismadb'
 
 const page = async ({ params }: { params: postType }) => {
-  /*
   const { id } = params
   const post = await prisma.blog.findUnique({
     where: { id },
@@ -68,11 +67,10 @@ const page = async ({ params }: { params: postType }) => {
       </div>
     </div>
   ) : (
-    */
-  ;<h1 className="text-3xl font-extrabold">
-    Trouble Grabbing Post, Try Again!
-  </h1>
-  //)
+    <h1 className="text-3xl font-extrabold">
+      Trouble Grabbing Post, Try Again!
+    </h1>
+  )
 }
 
 export default page
