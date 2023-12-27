@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { DeletePost } from '@/app/actions/blogActions'
+import { DeletePost } from '@/actions/blogActions'
 import Button from '../ui/button'
 import { postType } from '@/types/postTypes'
 import Input from '../ui/input'

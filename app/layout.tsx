@@ -1,9 +1,10 @@
+export const dynamic = 'force-dynamic'
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
 import Navbar from '@/components/shared/nav'
 import Footer from '@/components/shared/footer'
 import { NextAuthProvider } from '@/context/authContext'
-import getCurrentUser from './actions/getCurrentUser'
+import getCurrentUser from '../actions/getCurrentUser'
 import './globals.css'
 import { EdgeStoreProvider } from '@/lib/edgestore'
 

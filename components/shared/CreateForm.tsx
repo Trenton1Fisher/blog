@@ -6,7 +6,7 @@ import { useEdgeStore } from '@/lib/edgestore'
 import { useState, useEffect } from 'react'
 import { SingleImageDropzone } from '../ui/uploadImage'
 import { userType } from '@/types/userTypes'
-import { CreatePost } from '@/app/actions/blogActions'
+import { CreatePost } from '@/actions/blogActions'
 import Button from '../ui/button'
 
 export default function CreateForm({ user }: { user: userType }) {

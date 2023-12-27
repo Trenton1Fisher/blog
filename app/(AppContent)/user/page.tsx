@@ -1,5 +1,5 @@
 import prisma from '@/lib/prismadb'
-import getCurrentUser from '@/app/actions/getCurrentUser'
+import getCurrentUser from '@/actions/getCurrentUser'
 import BlogCard from '@/components/shared/blogCard'
 import Delete from '@/components/shared/DeletePost'
 

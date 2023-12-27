@@ -1,4 +1,4 @@
-import getCurrentUser from '@/app/actions/getCurrentUser'
+import getCurrentUser from '@/actions/getCurrentUser'
 import CreateForm from '@/components/shared/CreateForm'
 
 export default async function Home() {
