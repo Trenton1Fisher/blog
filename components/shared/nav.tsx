@@ -13,7 +13,7 @@ import { signOut } from 'next-auth/react'
 import Image from 'next/image'
 
 interface NavbarProps {
-  user: User
+  user: User | null
 }
 
 const Navbar: React.FC<NavbarProps> = ({ user }) => {
