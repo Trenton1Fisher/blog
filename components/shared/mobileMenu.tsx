@@ -11,9 +11,11 @@ import Button from '../ui/button'
 import { navLinks } from '@/contants'
 import UseMenuActive from '@/hooks/useMenuActive'
 import Route from '../ui/route'
+import { useRouter } from 'next/navigation'
 
 export default function MobileMenue() {
   const [openMenu, setOpenMenu] = useState(false)
+  const router = useRouter()
 
   function MenuHandler() {
     setOpenMenu(!openMenu)
@@ -63,10 +65,14 @@ export default function MobileMenue() {
               })}
             </ul>
             <div className="flex gap-5 flex-1 flex-col py-5">
-              <Button text="Log In" onClick={() => null} aria="Log In Button" />
+              <Button
+                text="Log In"
+                onClick={() => router.push('/api/auth/signin')}
+                aria="Log In Button"
+              />
               <Button
                 text="Sign Up"
-                onClick={() => null}
+                onClick={() => router.push('/api/auth/signin')}
                 aria="Sign Up Button"
               />
             </div>
