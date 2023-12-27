@@ -5,6 +5,7 @@ import Footer from '@/components/shared/footer'
 import { NextAuthProvider } from '@/context/authContext'
 import getCurrentUser from './actions/getCurrentUser'
 import './globals.css'
+import { EdgeStoreProvider } from '@/lib/edgestore'
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -26,9 +27,11 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`${roboto.className} overflowx-hidden bg-light`}>
         <NextAuthProvider>
-          <Navbar user={user} />
-          {children}
-          <Footer />
+          <EdgeStoreProvider>
+            <Navbar user={user} />
+            {children}
+            <Footer />
+          </EdgeStoreProvider>
         </NextAuthProvider>
       </body>
     </html>

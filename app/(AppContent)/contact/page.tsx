@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import Overlay from '@/components/ui/overlay'
 import Button from '@/components/ui/button'
-import { Bubblegum_Sans } from 'next/font/google'
 
 export default function Home() {
   return (

@@ -1,16 +1,19 @@
 'use client'
 
 import { useState } from 'react'
-import { blogData } from '@/contants/blogData'
 import BlogCard from './blogCard'
 import Button from '../ui/button'
+import { postType } from '@/types/postTypes'
 
-export default function LatestPost() {
-  const latestPosts = blogData.filter(blog => blog.latestPost === true)
-  const [visibleBlogs, setVisibleBlogs] = useState(3)
+const LatestPost: React.FC<{ posts: postType[] }> = ({ posts }) => {
+  const latestPost = posts.sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  )
 
-  function showMoreBlogs() {
-    setVisibleBlogs(prev => prev + 3)
+  const [visibleBlogs, setVisibleBlogs] = useState(5)
+
+  const showMoreBlogs = () => {
+    setVisibleBlogs(prevVisibleBlogs => prevVisibleBlogs + 3)
   }
 
   return (
@@ -20,19 +23,20 @@ export default function LatestPost() {
           id="latest-post"
           className="text-center text-2xl font-extrabold uppercase text-tertiary inline-block px-2 mb-10"
         >
-          Lastest Post
+          Latest Post
         </h2>
       </div>
+
       <div className="flex flex-col gap-10 h-full">
-        {latestPosts.slice(0, visibleBlogs).map((post, id) => (
+        {latestPost.slice(0, visibleBlogs).map((post, id) => (
           <BlogCard post={post} key={id} />
         ))}
-        {visibleBlogs < latestPosts.length && (
+        {visibleBlogs < latestPost.length && (
           <div className="flex justify-center">
             <Button
               onClick={showMoreBlogs}
-              text="Show More"
-              aria="Show More Blog Posts"
+              text="Show more"
+              aria="Show more blog post"
             />
           </div>
         )}
@@ -40,3 +44,5 @@ export default function LatestPost() {
     </section>
   )
 }
+
+export default LatestPost

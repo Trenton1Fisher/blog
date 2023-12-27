@@ -1,11 +1,20 @@
 import Posts from '@/components/shared/Posts'
 import TopPost from '@/components/shared/topPost'
+import prisma from '@/lib/prismadb'
+import { postType } from '@/types/postTypes'
 
-export default function Home() {
+export default async function Home() {
+  const posts = await prisma.blog.findMany({
+    include: {
+      user: true,
+    },
+  })
   return (
-    <div className="grid lg:grid-cols-3 lg:gap-10 grid-cols-1 w-[95%] max-w-[1450px] overflow-y-hidden h-fit mt-10 max-lg:space-y-7 mx-auto">
-      <Posts />
-      <TopPost />
+    <div>
+      <div className="grid lg:grid-cols-3 lg:gap-10 grid-cols-1 w-[95%] max-w-[1450px] mx-auto overflow-y-hidden h-fit mt-10 max-lg:space-y-7">
+        <Posts posts={posts} />
+        <TopPost posts={posts} />
+      </div>
     </div>
   )
 }

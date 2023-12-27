@@ -1,5 +1,5 @@
 interface tagProps {
-  text: string[]
+  text: string
 }
 
 export default function Tag({ text }: tagProps) {
